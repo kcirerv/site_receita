@@ -1,0 +1,38 @@
+// Lista de receitas
+const receitas = [
+  { nome: "Bolo de Cenoura", descricao: "Um delicioso bolo de cenoura com cobertura de chocolate." },
+  { nome: "Macarrão à Carbonara", descricao: "Macarrão com molho cremoso e bacon crocante." }
+];
+
+// Exibe as receitas na tela
+function exibirReceitas() {
+  const listaReceitas = document.getElementById("receita-list");
+  listaReceitas.innerHTML = "";
+
+  receitas.forEach((receita) => {
+    const div = document.createElement("div");
+    div.classList.add("receita-item");
+    div.innerHTML = `<h3>${receita.nome}</h3><p>${receita.descricao}</p>`;
+    listaReceitas.appendChild(div);
+  });
+}
+
+// Adiciona uma nova receita
+document.getElementById("form-receita").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const nome = document.getElementById("nome-receita").value;
+  const descricao = document.getElementById("descricao-receita").value;
+
+  if (nome && descricao) {
+    receitas.push({ nome, descricao });
+    exibirReceitas();
+
+    // Limpa o formulário
+    document.getElementById("nome-receita").value = "";
+    document.getElementById("descricao-receita").value = "";
+  }
+});
+
+// Exibe as receitas quando a página carrega
+exibirReceitas();
